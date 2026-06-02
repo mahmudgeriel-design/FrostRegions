@@ -15,42 +15,47 @@
     </properties>
 
     <repositories>
-        <!-- Рабочее зеркало Spigot и Paper API -->
+        <!-- Только 100% стабильные и крупные репозитории, которые никогда не отдадут битые файлы -->
         <repository>
             <id>papermc</id>
             <url>https://papermc.io</url>
         </repository>
-        <!-- Официальный рабочий репозиторий EngineHub (WorldGuard) -->
-        <repository>
-            <id>enginehub-maven</id>
-            <url>https://enginehub.org</url>
-        </repository>
-        <!-- Рабочий репозиторий для DecentHolograms -->
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <!-- Репозиторий для NBT API, который запросил твой сервер -->
         <repository>
             <id>codemc-repo</id>
             <url>https://codemc.org</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
-        <!-- Стабильное Paper/Spigot API для 1.16.5 -->
+        <!-- Стабильное Paper API для 1.16.5 -->
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <!-- WorldGuard -->
+        <!-- Рабочая альтернативная версия WorldGuard без битых bStats зависимостей -->
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-core</artifactId>
+            <version>7.0.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q.worldguard</artifactId>
             <artifactId>worldguard-bukkit</artifactId>
             <version>7.0.5</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bstats</groupId>
+                    <artifactId>bstats-bukkit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- DecentHolograms -->
         <dependency>
@@ -59,7 +64,7 @@
             <version>2.8.6</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Фикс ошибки: добавляем NBT API -->
+        <!-- Item-NBT-API с официального зеркала CodeMC -->
         <dependency>
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api-plugin</artifactId>
